@@ -14,6 +14,23 @@ def validar_opcion(cadena):
     else:
         return False
 
+def yankenpo(eleccion, win_pc, win_user, draw):
+
+    eleccion_pc = random.randint(1,3)
+    eleccion_user = OPCIONES[eleccion]
+
+    if eleccion_pc == eleccion_user:
+        draw += 1
+        print("empate")
+    elif (eleccion_pc == 1 and eleccion_user == 3) or (eleccion_pc == 2 and eleccion_user == 1) or (eleccion_pc == 3 and eleccion_user == 2):
+        win_pc += 1
+        print("gano la PC")
+    else:
+        win_user += 1
+        print("gano el usuario")
+
+    return win_pc, win_user, draw
+
 def main():
 
     introduccion = ["Bienvenido al Juego de Piedra Papel o tijeras", 
@@ -33,11 +50,11 @@ def main():
     
     while(True):
         if contador == 0:
-            print(mensaje[0] + contador)
+            print(mensaje[0] + str(contador))
         else:
-            print(mensaje[0] + contador)
-            print(mensaje[1] + win_user)
-            print(mensaje[2] + win_pc)
+            print(mensaje[0] + str(contador))
+            print(mensaje[1] + str(win_user))
+            print(mensaje[2] + str(win_pc))
         while(True):
             valor = validar_opcion(input("escriba una opcion:"))
             if valor != False:
@@ -48,10 +65,10 @@ def main():
             print("Gracias por jugar")
             break
 
-        
+        win_pc, win_user, draw = yankenpo(valor,win_pc,win_user,draw)
+
+        contador += 1
       
 
-    pass
-
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
